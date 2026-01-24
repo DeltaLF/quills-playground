@@ -5,8 +5,20 @@
       "on-surface": { "value": "{color.core.neutral.900}" },
       "surface-variant": { "value": "{color.core.neutral.100}" },
       "outline": { "value": "{color.core.neutral.300}" },
-      "primary": { "value": "{color.core.primary.600}" },
+      
+      "primary": { "value": "{color.core.blue.600}" },
       "on-primary": { "value": "{color.core.neutral.0}" },
+      "primary-container": { "value": "{color.core.blue.100}" },
+      "on-primary-container": { "value": "{color.core.blue.900}" },
+
+      "secondary": { "value": "{color.core.teal.600}" },
+      "on-secondary": { "value": "{color.core.neutral.0}" },
+      "secondary-container": { "value": "{color.core.teal.100}" },
+      "on-secondary-container": { "value": "{color.core.teal.900}" },
+
+      "error": { "value": "{color.core.red.600}" },
+      "on-error": { "value": "{color.core.neutral.0}" },
+
       "editor-bg": { "value": "{color.core.neutral.0}" },
       "editor-text": { "value": "{color.core.neutral.900}" }
     }

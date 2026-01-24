@@ -1,4 +1,4 @@
-/* Quill Theme Overrides using System Tokens */
+/* Quill Theme Overrides using COMPONENT Tokens */
 
 /* The Editor Container */
 .ql-container {
@@ -13,29 +13,62 @@
   /* Toolbar */
   &.ql-toolbar, 
   .ql-toolbar {
-    background-color: var(--sys-color-surface-variant);
-    border-color: var(--sys-color-outline);
+    background-color: var(--component-quill-toolbar-bg);
+    border-color: var(--component-quill-toolbar-border);
     
     button {
-      color: var(--sys-color-on-surface);
+      color: var(--component-quill-toolbar-text);
       
       &:hover, 
       &.ql-active {
-        color: var(--sys-color-primary);
-        .ql-stroke { stroke: var(--sys-color-primary); }
-        .ql-fill { fill: var(--sys-color-primary); }
+        color: var(--component-quill-toolbar-active);
+        .ql-stroke { stroke: var(--component-quill-toolbar-active); }
+        .ql-fill { fill: var(--component-quill-toolbar-active); }
       }
       
-      .ql-stroke { stroke: var(--sys-color-on-surface); }
-      .ql-fill { fill: var(--sys-color-on-surface); }
+      .ql-stroke { stroke: var(--component-quill-toolbar-text); }
+      .ql-fill { fill: var(--component-quill-toolbar-text); }
+    }
+
+    /* Fix Dropdowns (Pickers) */
+    .ql-picker {
+      color: var(--component-quill-toolbar-text);
+      
+      /* The Label (The text you see in the toolbar) */
+      .ql-picker-label {
+        color: inherit;
+        .ql-stroke { stroke: var(--component-quill-toolbar-text); }
+        &:hover {
+          color: var(--component-quill-toolbar-active);
+          .ql-stroke { stroke: var(--component-quill-toolbar-active); }
+        }
+      }
+
+      /* The Dropdown Menu */
+      .ql-picker-options {
+        background-color: var(--component-quill-toolbar-bg);
+        border-color: var(--component-quill-toolbar-border);
+        color: var(--component-quill-toolbar-text);
+        
+        .ql-picker-item {
+          color: inherit;
+          &:hover, &.ql-selected {
+             color: var(--component-quill-toolbar-active);
+          }
+        }
+      }
     }
   }
 
   /* Content Area */
   &.ql-container {
-    border-color: var(--sys-color-outline);
-    background-color: var(--sys-color-editor-bg);
-    color: var(--sys-color-editor-text);
+    border-color: var(--component-quill-toolbar-border);
+    background-color: var(--component-quill-editor-bg);
+    color: var(--component-quill-editor-text);
+
+    .ql-editor.ql-blank::before {
+      color: var(--component-quill-editor-placeholder);
+    }
   }
 }
 
@@ -43,33 +76,25 @@
  * 2. BUBBLE THEME OVERRIDES 
  */
 .ql-bubble {
-  /* Tooltip (The floating bubble) */
+  /* Tooltip */
   .ql-tooltip {
-    background-color: var(--sys-color-surface-variant);
-    border-radius: 8px;
+    background-color: var(--component-quill-toolbar-bg);
+    border-radius: var(--radius-medium);
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    color: var(--sys-color-on-surface);
+    color: var(--component-quill-toolbar-text);
     
     .ql-tooltip-arrow {
-      border-bottom-color: var(--sys-color-surface-variant);
+      border-bottom-color: var(--component-quill-toolbar-bg);
     }
   }
 
   /* Content Area */
   &.ql-container {
-    background-color: var(--sys-color-editor-bg);
-    color: var(--sys-color-editor-text);
-    /* Bubble doesn't have a border by default, but we can add one if desired */
-  }
-  
-  /* Editor Placeholder */
-  .ql-editor.ql-blank::before {
-    color: var(--sys-color-outline);
-    font-style: italic;
-  }
-}
+    background-color: var(--component-quill-editor-bg);
+    color: var(--component-quill-editor-text);
 
-/* Shared: Placeholder Text */
-.ql-editor.ql-blank::before {
-  color: var(--sys-color-outline);
+    .ql-editor.ql-blank::before {
+      color: var(--component-quill-editor-placeholder);
+    }
+  }
 }

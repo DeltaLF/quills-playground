@@ -1,0 +1,17 @@
+{
+  "component": {
+    "quill": {
+      "toolbar": {
+        "bg": { "value": "{sys.color.surface-variant}" },
+        "border": { "value": "{sys.color.outline}" },
+        "text": { "value": "{sys.color.on-surface}" },
+        "active": { "value": "{sys.color.primary}" }
+      },
+      "editor": {
+        "bg": { "value": "{sys.color.editor-bg}" },
+        "text": { "value": "{sys.color.editor-text}" },
+        "placeholder": { "value": "{sys.color.outline}" }
+      }
+    }
+  }
+}

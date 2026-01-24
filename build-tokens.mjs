@@ -12,14 +12,17 @@ StyleDictionary.registerFormat({
 
 // LIGHT THEME CONFIG
 const lightConfig = {
-  source: ["tokens/core/**/*.json", "tokens/semantic/theme.json"],
+  source: ["tokens/core/**/*.json", "tokens/semantic/theme.json", "tokens/component/**/*.json"],
   platforms: {
     css: {
       transformGroup: "css",
       buildPath: "src/assets/styles/",
       files: [{
         destination: "_variables.css",
-        format: "css/variables"
+        format: "css/variables",
+        options: {
+          outputReferences: true
+        }
       }]
     }
   }
@@ -27,7 +30,7 @@ const lightConfig = {
 
 // DARK THEME CONFIG
 const darkConfig = {
-  source: ["tokens/core/**/*.json", "tokens/semantic/theme-dark.json"],
+  source: ["tokens/core/**/*.json", "tokens/semantic/theme-dark.json", "tokens/component/**/*.json"],
   platforms: {
     css: {
       transformGroup: "css",
@@ -36,7 +39,8 @@ const darkConfig = {
         destination: "_variables-dark.css",
         format: "css/dark-theme",
         options: {
-          selector: ".dark-theme"
+          selector: ".dark-theme",
+          outputReferences: true
         }
       }]
     }
