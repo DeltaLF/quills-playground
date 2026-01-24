@@ -1,0 +1,14 @@
+{
+  "sys": {
+    "color": {
+      "surface": { "value": "{color.core.neutral.0}" },
+      "on-surface": { "value": "{color.core.neutral.900}" },
+      "surface-variant": { "value": "{color.core.neutral.100}" },
+      "outline": { "value": "{color.core.neutral.300}" },
+      "primary": { "value": "{color.core.primary.600}" },
+      "on-primary": { "value": "{color.core.neutral.0}" },
+      "editor-bg": { "value": "{color.core.neutral.0}" },
+      "editor-text": { "value": "{color.core.neutral.900}" }
+    }
+  }
+}

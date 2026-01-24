@@ -1,0 +1,29 @@
+.playground {
+  padding: 2rem;
+  border: 1px solid var(--sys-color-outline);
+  border-radius: 8px;
+  background-color: var(--sys-color-surface);
+  color: var(--sys-color-on-surface);
+  margin-bottom: 2rem;
+}
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.color-card {
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--sys-color-outline);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  
+  &.surface { background-color: var(--sys-color-surface); color: var(--sys-color-on-surface); }
+  &.on-surface { background-color: var(--sys-color-on-surface); color: var(--sys-color-surface); } /* Inverted for visibility */
+  &.primary { background-color: var(--sys-color-primary); color: var(--sys-color-on-primary); }
+  &.surface-variant { background-color: var(--sys-color-surface-variant); color: var(--sys-color-on-surface); }
+}

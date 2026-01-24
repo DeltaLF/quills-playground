@@ -1,0 +1,29 @@
+<section class="playground">
+  <h2>Design Tokens Playground</h2>
+  
+  <button (click)="toggleTheme()">
+    Switch to {{ isDark ? 'Light' : 'Dark' }} Mode
+  </button>
+
+  <div class="color-grid">
+    <div class="color-card surface">
+      <span>Surface</span>
+      <code>var(--sys-color-surface)</code>
+    </div>
+    
+    <div class="color-card on-surface">
+      <span>On Surface</span>
+      <code>var(--sys-color-on-surface)</code>
+    </div>
+
+    <div class="color-card primary">
+      <span>Primary</span>
+      <code>var(--sys-color-primary)</code>
+    </div>
+
+    <div class="color-card surface-variant">
+      <span>Surface Variant</span>
+      <code>var(--sys-color-surface-variant)</code>
+    </div>
+  </div>
+</section>

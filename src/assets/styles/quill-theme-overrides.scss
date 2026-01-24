@@ -1,0 +1,75 @@
+/* Quill Theme Overrides using System Tokens */
+
+/* The Editor Container */
+.ql-container {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* 
+ * 1. SNOW THEME OVERRIDES 
+ */
+.ql-snow {
+  /* Toolbar */
+  &.ql-toolbar, 
+  .ql-toolbar {
+    background-color: var(--sys-color-surface-variant);
+    border-color: var(--sys-color-outline);
+    
+    button {
+      color: var(--sys-color-on-surface);
+      
+      &:hover, 
+      &.ql-active {
+        color: var(--sys-color-primary);
+        .ql-stroke { stroke: var(--sys-color-primary); }
+        .ql-fill { fill: var(--sys-color-primary); }
+      }
+      
+      .ql-stroke { stroke: var(--sys-color-on-surface); }
+      .ql-fill { fill: var(--sys-color-on-surface); }
+    }
+  }
+
+  /* Content Area */
+  &.ql-container {
+    border-color: var(--sys-color-outline);
+    background-color: var(--sys-color-editor-bg);
+    color: var(--sys-color-editor-text);
+  }
+}
+
+/* 
+ * 2. BUBBLE THEME OVERRIDES 
+ */
+.ql-bubble {
+  /* Tooltip (The floating bubble) */
+  .ql-tooltip {
+    background-color: var(--sys-color-surface-variant);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    color: var(--sys-color-on-surface);
+    
+    .ql-tooltip-arrow {
+      border-bottom-color: var(--sys-color-surface-variant);
+    }
+  }
+
+  /* Content Area */
+  &.ql-container {
+    background-color: var(--sys-color-editor-bg);
+    color: var(--sys-color-editor-text);
+    /* Bubble doesn't have a border by default, but we can add one if desired */
+  }
+  
+  /* Editor Placeholder */
+  .ql-editor.ql-blank::before {
+    color: var(--sys-color-outline);
+    font-style: italic;
+  }
+}
+
+/* Shared: Placeholder Text */
+.ql-editor.ql-blank::before {
+  color: var(--sys-color-outline);
+}

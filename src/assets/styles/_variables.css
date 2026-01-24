@@ -1,0 +1,33 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --color-core-neutral-0: #ffffff;
+  --color-core-neutral-50: #f8f9fa;
+  --color-core-neutral-100: #f1f3f4;
+  --color-core-neutral-200: #e8eaed;
+  --color-core-neutral-300: #dadce0;
+  --color-core-neutral-400: #bdc1c6;
+  --color-core-neutral-500: #9aa0a6;
+  --color-core-neutral-600: #80868b;
+  --color-core-neutral-700: #5f6368;
+  --color-core-neutral-800: #3c4043;
+  --color-core-neutral-900: #202124;
+  --color-core-neutral-1000: #000000;
+  --color-core-primary-50: #e8f0fe;
+  --color-core-primary-100: #d2e3fc;
+  --color-core-primary-300: #8ab4f8;
+  --color-core-primary-500: #4285f4;
+  --color-core-primary-600: #1a73e8;
+  --color-core-primary-700: #1967d2;
+  --color-core-primary-900: #174ea6;
+  --sys-color-surface: #ffffff;
+  --sys-color-on-surface: #202124;
+  --sys-color-surface-variant: #f1f3f4;
+  --sys-color-outline: #dadce0;
+  --sys-color-primary: #1a73e8;
+  --sys-color-on-primary: #ffffff;
+  --sys-color-editor-bg: #ffffff;
+  --sys-color-editor-text: #202124;
+}
