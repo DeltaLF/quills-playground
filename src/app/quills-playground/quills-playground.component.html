@@ -3,13 +3,16 @@
   <div class="editor-pane">
     <div class="controls">
       <button (click)="switchQuillTheme()">Switch theme</button>
-      <span>Current theme: <strong>{{ quillTheme }}</strong></span>
+      <span
+        >Current theme: <strong>{{ quillTheme }}</strong></span
+      >
     </div>
-    
+
     <h1>Quills Editor</h1>
-    
+
     <!-- Custom Toolbar -->
-    <div #toolbar [style.display]="quillTheme === 'snow' ? 'block' : 'none'">
+    <div #toolbar *ngIf="showToolbar">
+      <!-- <div #toolbar [style.display]="quillTheme === 'snow' ? 'block' : 'none'"> -->
       <span class="ql-formats">
         <select class="ql-header">
           <option value="1">Heading 1</option>
@@ -34,12 +37,22 @@
       <!-- Custom Button -->
       <span class="ql-formats">
         <button class="ql-star" type="button">
-           <!-- SVG Icon for Star -->
-           <svg viewBox="0 0 18 18"> <path class="ql-fill" d="M9,2l2.3,4.7L16.5,7.5L12.9,11l0.8,5.1L9,13.7L4.3,16.1L5.1,11L1.5,7.5l5.2-0.8L9,2z"/> </svg>
+          <!-- SVG Icon for Star -->
+          <svg viewBox="0 0 18 18">
+            <path
+              class="ql-fill"
+              d="M9,2l2.3,4.7L16.5,7.5L12.9,11l0.8,5.1L9,13.7L4.3,16.1L5.1,11L1.5,7.5l5.2-0.8L9,2z"
+            />
+          </svg>
         </button>
         <button class="ql-table" type="button">
           <!-- SVG Icon for Table -->
-          <svg viewBox="0 0 18 18"> <path class="ql-fill" d="M16,4H2C0.9,4,0,4.9,0,6v6c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V6C18,4.9,17.1,4,16,4z M2,6h4v2H2V6z M8,6h4v2H8V6z M14,6h2v2h-2V6z M2,10h4v2H2V10z M8,10h4v2H8V10z M14,10h2v2h-2V10z"/> </svg>
+          <svg viewBox="0 0 18 18">
+            <path
+              class="ql-fill"
+              d="M16,4H2C0.9,4,0,4.9,0,6v6c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V6C18,4.9,17.1,4,16,4z M2,6h4v2H2V6z M8,6h4v2H8V6z M14,6h2v2h-2V6z M2,10h4v2H2V10z M8,10h4v2H8V10z M14,10h2v2h-2V10z"
+            />
+          </svg>
         </button>
       </span>
     </div>
@@ -50,20 +63,20 @@
   <!-- Right: Inspector -->
   <div class="inspector-pane">
     <h2>Inspector</h2>
-    
+
     <div class="inspector-section">
       <h3>Selection Range</h3>
-      <pre>{{ selectionRange | json }}</pre>
+      <pre>{{ selectionRange() | json }}</pre>
     </div>
 
     <div class="inspector-section">
       <h3>Delta (JSON Model)</h3>
-      <pre class="code-block">{{ editorDelta | json }}</pre>
+      <pre class="code-block">{{ editorDelta() | json }}</pre>
     </div>
 
     <div class="inspector-section">
       <h3>HTML Output</h3>
-      <pre class="code-block">{{ editorContent }}</pre>
+      <pre class="code-block">{{ editorContent() }}</pre>
     </div>
   </div>
 </div>

@@ -1,11 +1,19 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { JsonPipe } from '@angular/common';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  signal,
+  WritableSignal,
+  NgZone,
+  ChangeDetectorRef,
+} from '@angular/core';
+import { JsonPipe, CommonModule } from '@angular/common';
 import Quill from 'quill';
 import 'quill/dist/quill.core.css';
 
 @Component({
   selector: 'app-quills-playground',
-  imports: [JsonPipe],
+  imports: [JsonPipe, CommonModule],
   templateUrl: './quills-playground.component.html',
   styleUrl: './quills-playground.component.scss',
   standalone: true,
@@ -13,18 +21,25 @@ import 'quill/dist/quill.core.css';
 export class QuillsPlaygroundComponent {
   @ViewChild('editorContainer') editorContainer!: ElementRef;
   @ViewChild('toolbar') toolbar!: ElementRef;
+
   public quillTheme: 'snow' | 'bubble' = 'snow';
+  public showToolbar = this.quillTheme === 'snow';
   private quill: Quill | null = null;
 
-  // Inspector Data
-  public editorContent = '';
-  public editorText = '';
-  public editorDelta: any = null;
-  public selectionRange: any = null;
+  // Inspector Data (Signals)
+  // Initialize with values that match "Empty Editor" state to prevent ExpressionChanged error
+  public editorContent: WritableSignal<string> = signal('<p><br></p>');
+  public editorText: WritableSignal<string> = signal('\n');
+  public editorDelta: WritableSignal<any> = signal({ ops: [{ insert: '\n' }] });
+  public selectionRange: WritableSignal<any> = signal(null);
 
-  constructor() {}
+  constructor(
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   ngAfterViewInit() {
+    // Direct call, no setTimeout needed if initial signal values match UI
     this.initializeQuill();
   }
 
@@ -37,11 +52,8 @@ export class QuillsPlaygroundComponent {
       table: true,
     };
 
-    // Configure Toolbar only for Snow theme
-    if (this.quillTheme === 'snow' && this.toolbar) {
-      // Reset classes to prevent "ql-snow ql-bubble" conflicts or missing classes
-      this.toolbar.nativeElement.className = '';
-
+    // Configure Toolbar only if visible and ElementRef exists
+    if (this.showToolbar && this.toolbar) {
       modules.toolbar = {
         container: this.toolbar.nativeElement,
         handlers: {
@@ -65,20 +77,26 @@ export class QuillsPlaygroundComponent {
       theme: this.quillTheme,
     });
 
-    // Initial Data
+    // Initial Data Sync
     this.updateInspector();
 
     // Event Listeners
-    this.quill.on('text-change', () => this.updateInspector());
+    this.quill.on('text-change', () => {
+      this.ngZone.run(() => this.updateInspector());
+    });
+
     this.quill.on('selection-change', (range) => {
-      this.selectionRange = range;
+      this.ngZone.run(() => {
+        this.selectionRange.set(range);
+      });
     });
   }
+
   updateInspector() {
     if (!this.quill) return;
-    this.editorContent = this.quill.root.innerHTML;
-    this.editorText = this.quill.getText();
-    this.editorDelta = this.quill.getContents();
+    this.editorContent.set(this.quill.root.innerHTML);
+    this.editorText.set(this.quill.getText());
+    this.editorDelta.set(this.quill.getContents());
   }
 
   ngDestroy() {
@@ -90,18 +108,27 @@ export class QuillsPlaygroundComponent {
   public switchQuillTheme() {
     const currentContents = this.quill?.getContents();
 
-    // Clean up old instance and DOM
+    // 1. Destroy Editor DOM
     this.editorContainer.nativeElement.innerHTML = '';
 
-    // Switch theme
+    // 2. Destroy Toolbar DOM (Synchronously)
+    this.showToolbar = false;
+    this.cdr.detectChanges(); // Angular removes <div #toolbar> from DOM
+
+    // 3. Switch Theme
     this.quillTheme = this.quillTheme === 'snow' ? 'bubble' : 'snow';
 
-    // Create fresh instance
+    // 4. Recreate Toolbar DOM (Synchronously, if needed)
+    if (this.quillTheme === 'snow') {
+      this.showToolbar = true;
+      this.cdr.detectChanges(); // Angular creates a NEW <div #toolbar>
+    }
+
+    // 5. Initialize on fresh DOM
     this.initializeQuill();
 
     if (currentContents) {
       this.quill?.setContents(currentContents);
-      // Manually trigger update since setContents doesn't always fire text-change in the same way for init
       this.updateInspector();
     }
   }
