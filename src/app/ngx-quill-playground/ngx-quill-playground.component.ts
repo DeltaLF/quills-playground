@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { QuillEditorComponent } from 'ngx-quill';
 import Quill from 'quill';
-import tokens from '@tokens';
+import { getCoreColorPalette } from '../utils/token.utils';
 
 // Registering Custom Font Sizes based on our Tokens
 const Size = Quill.import('attributors/style/size') as any;
@@ -19,27 +19,11 @@ Quill.register(Size, true);
 export class NgxQuillPlaygroundComponent {
   editorControl = new FormControl('<h1>Welcome to NGX-Quill</h1><p>Try the custom <strong>Tokens</strong> for color and size!</p>');
 
-  // Generate colors dynamically from the Design System tokens
-  private getCoreColors(): string[] {
-    const core = (tokens as any).color.core;
-    const palettes = ['neutral', 'blue', 'teal', 'red'];
-    const colors: string[] = [];
-
-    palettes.forEach(palette => {
-      if (core[palette]) {
-        Object.values(core[palette]).forEach((token: any) => {
-          colors.push(token.value);
-        });
-      }
-    });
-    return colors;
-  }
-
   quillConfig = {
     toolbar: [
       ['bold'],
       [{ 'size': Size.whitelist }],
-      [{ 'color': this.getCoreColors() }, { 'background': this.getCoreColors() }],
+      [{ 'color': getCoreColorPalette() }, { 'background': getCoreColorPalette() }],
       [{ 'list': 'ordered'}, { 'list': 'bullet' }],
       ['link', 'clean']
     ]
