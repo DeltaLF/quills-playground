@@ -1,54 +1,12 @@
-.ngx-playground {
+.playground-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 3rem;
 }
 
-.subtitle {
-  color: var(--sys-color-outline);
-  font-style: italic;
-  margin-top: -1rem;
-}
-
-/* Fix Editor Layout */
-quill-editor {
-  display: block;
-  height: 300px; /* Give it explicit height */
-  margin-bottom: 3rem; /* Space for the toolbar dropdowns to overflow */
-}
-
-.output-preview {
-  margin-top: 2rem;
-  padding: 1rem;
-  background-color: var(--sys-color-surface-variant);
-  border-radius: var(--radius-small);
-  
-  pre {
-    white-space: pre-wrap;
-    font-family: var(--typography-family-mono);
-    font-size: var(--typography-size-sm);
-    color: var(--sys-color-on-surface);
-  }
-}
-
-/* 
- * Custom labels for our Token-based sizes in the Quill dropdown
- */
-::ng-deep {
-  .ql-snow .ql-picker.ql-size {
-    .ql-picker-label[data-value="0.875rem"]::before,
-    .ql-picker-item[data-value="0.875rem"]::before { content: 'Small'; }
-
-    .ql-picker-label[data-value="1rem"]::before,
-    .ql-picker-item[data-value="1rem"]::before { content: 'Normal'; }
-
-    .ql-picker-label[data-value="1.125rem"]::before,
-    .ql-picker-item[data-value="1.125rem"]::before { content: 'Large'; }
-
-    .ql-picker-label[data-value="1.25rem"]::before,
-    .ql-picker-item[data-value="1.25rem"]::before { content: 'Extra Large'; }
-
-    .ql-picker-label[data-value="1.5rem"]::before,
-    .ql-picker-item[data-value="1.5rem"]::before { content: 'Huge'; }
-  }
+.divider {
+  border: 0;
+  height: 1px;
+  background-color: var(--sys-color-outline);
+  margin: 0;
 }

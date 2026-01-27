@@ -1,0 +1,58 @@
+.ngx-playground {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.custom-toolbar {
+  background: var(--sys-color-surface-variant);
+  padding: 0.5rem;
+  border: 1px solid var(--sys-color-outline);
+  border-radius: var(--radius-small);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.75rem;
+  color: var(--sys-color-outline);
+  text-transform: uppercase;
+}
+
+.divider {
+  width: 1px;
+  height: 20px;
+  background: var(--sys-color-outline);
+}
+
+button {
+  padding: 0.5rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--sys-color-on-surface);
+  border-radius: 4px;
+
+  &:hover {
+    background: var(--sys-color-surface);
+  }
+
+  &.active, &.ql-active {
+    background: var(--sys-color-primary-container);
+    color: var(--sys-color-on-primary-container);
+  }
+}
+
+quill-editor {
+  display: block;
+  height: 200px;
+  background: var(--sys-color-surface);
+  border: 1px solid var(--sys-color-outline);
+}
