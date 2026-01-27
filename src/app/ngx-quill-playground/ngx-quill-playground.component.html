@@ -1,1 +1,16 @@
-<p>ngx-quill-playground works!</p>
+<div class="ngx-playground">
+  <h1>NGX-Quill (Example 1)</h1>
+  <p class="subtitle">Reactive Forms + Token Integration</p>
+
+  <quill-editor 
+    [formControl]="editorControl"
+    [modules]="quillConfig"
+    theme="snow"
+    placeholder="Start typing with design tokens...">
+  </quill-editor>
+
+  <div class="output-preview">
+    <h3>Live HTML Output</h3>
+    <pre>{{ editorControl.value }}</pre>
+  </div>
+</div>

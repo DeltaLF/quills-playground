@@ -40,3 +40,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Generated Design Tokens
+src/assets/styles/_variables.css
+src/assets/styles/_variables-dark.css
+src/assets/tokens.ts
