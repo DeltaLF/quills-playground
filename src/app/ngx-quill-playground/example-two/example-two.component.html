@@ -5,20 +5,7 @@
   <!--  The Custom Toolbar -->
   <!-- We give it an ID so Quill can find it easily via the modules config -->
   <div id="custom-toolbar-2" class="custom-toolbar">
-    <!-- AUTO-WIRED BUTTONS (Quill handles these if class matches) -->
     <span class="group">
-      <span class="label">Auto:</span>
-      <button class="ql-bold"></button>
-      <!-- Quill will handle this click & active state -->
-      <button class="ql-underline"></button>
-    </span>
-
-    <span class="divider"></span>
-
-    <!-- MANUAL BUTTONS (You handle these) -->
-    <span class="group">
-      <span class="label">Manual:</span>
-
       <!-- Bold (Manual) -->
       <button type="button" (click)="toggleBold()" [class.active]="isBold()">
         <b>B</b>
@@ -32,6 +19,27 @@
       >
         <i>I</i>
       </button>
+
+      <button
+        type="button"
+        (click)="toggleUnderline()"
+        [class.active]="isUnderline()"
+      >
+        <u>U</u>
+      </button>
+
+      <select
+        id="headerSelect"
+        [value]="selectedHeader()"
+        (change)="onHeaderSelectChange($event)"
+      >
+        <option value="null">Normal</option>
+        <option value="1">Header 1</option>
+        <option value="2">Header 2</option>
+        <option value="3">Header 3</option>
+        <option value="4">Header 4</option>
+        <option value="5">Header 5</option>
+      </select>
 
       <button
         type="button"
