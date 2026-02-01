@@ -32,6 +32,15 @@
       >
         <i>I</i>
       </button>
+
+      <button
+        type="button"
+        class="icon-button"
+        (click)="toggleReadOnly()"
+        [class.active]="isReadonly()"
+      >
+        <i class="material-icons">lock</i>
+      </button>
     </span>
   </div>
 
@@ -44,6 +53,7 @@
     (onContentChanged)="onContentChanged($event)"
     (onEditorCreated)="onEditorCreated($event)"
     (onSelectionChanged)="onSelectionChanged($event)"
+    [readOnly]="isReadonly()"
     placeholder="Select text to see the state update..."
   >
   </quill-editor>

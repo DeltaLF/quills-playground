@@ -18,6 +18,10 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+
+  .icon-button {
+    padding: 0;
+  }
 }
 
 .label {
@@ -44,7 +48,8 @@ button {
     background: var(--sys-color-surface);
   }
 
-  &.active, &.ql-active {
+  &.active,
+  &.ql-active {
     background: var(--sys-color-primary-container);
     color: var(--sys-color-on-primary-container);
   }

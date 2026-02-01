@@ -18,12 +18,12 @@ import Quill from 'quill';
 export class ExampleTwoComponent {
   @ViewChild('toolbar') toolbar!: ElementRef;
 
-  isBold = signal(false);
-  isItalic = signal(false);
+  protected isBold = signal(false);
+  protected isItalic = signal(false);
+  protected isReadonly = signal(false);
+  protected editorContent: string = '';
 
   private quillInstance: Quill | null = null;
-
-  protected editorContent: string = '';
 
   modules = {
     toolbar: {
@@ -72,5 +72,9 @@ export class ExampleTwoComponent {
       this.quillInstance.format('italic', !current);
       this.syncState();
     }
+  }
+
+  toggleReadOnly() {
+    this.isReadonly.set(!this.isReadonly());
   }
 }
