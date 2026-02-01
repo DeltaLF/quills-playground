@@ -61,3 +61,7 @@ quill-editor {
   background: var(--sys-color-surface);
   border: 1px solid var(--sys-color-outline);
 }
+
+quill-editor.focused {
+  border-color: var(--sys-color-primary);
+}

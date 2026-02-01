@@ -62,8 +62,11 @@
     (onContentChanged)="onContentChanged($event)"
     (onEditorCreated)="onEditorCreated($event)"
     (onSelectionChanged)="onSelectionChanged($event)"
+    (onFocus)="onFocus($event)"
+    (onBlur)="onBlur($event)"
     [readOnly]="isReadonly()"
     placeholder="Select text to see the state update..."
+    [class.focused]="isFocus()"
   >
   </quill-editor>
 

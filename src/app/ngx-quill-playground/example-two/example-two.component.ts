@@ -18,6 +18,7 @@ import Quill from 'quill';
 export class ExampleTwoComponent {
   @ViewChild('toolbar') toolbar!: ElementRef;
 
+  protected isFocus = signal(false);
   protected isBold = signal(false);
   protected isItalic = signal(false);
   protected isUnderline = signal(false);
@@ -60,6 +61,14 @@ export class ExampleTwoComponent {
     const value =
       selectElement.value === 'null' ? null : Number(selectElement.value);
     this.setFormat('header', value);
+  }
+
+  onFocus(event: any) {
+    this.isFocus.set(true);
+  }
+
+  onBlur(event: any) {
+    this.isFocus.set(false);
   }
 
   /**
