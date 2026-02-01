@@ -59,8 +59,7 @@ export class ExampleTwoComponent {
     const selectElement = event.target as HTMLSelectElement;
     const value =
       selectElement.value === 'null' ? null : Number(selectElement.value);
-    this.quillInstance.format('header', value);
-    this.syncState();
+    this.setFormat('header', value);
   }
 
   /**
@@ -77,31 +76,26 @@ export class ExampleTwoComponent {
   }
 
   toggleBold() {
-    if (this.quillInstance) {
-      const current = this.isBold();
-      this.quillInstance.format('bold', !current);
-      this.syncState();
-    }
+    this.setFormat('bold', !this.isBold());
   }
 
   toggleItalic() {
-    if (this.quillInstance) {
-      const current = this.isItalic();
-      this.quillInstance.format('italic', !current);
-      this.syncState();
-    }
+    this.setFormat('italic', !this.isItalic());
   }
 
   toggleUnderline() {
-    if (this.quillInstance) {
-      const current = this.isUnderline();
-      this.quillInstance.format('underline', !current);
-      this.syncState();
-    }
+    this.setFormat('underline', !this.isUnderline());
   }
 
   toggleReadOnly() {
     this.isReadonly.set(!this.isReadonly());
+  }
+
+  private setFormat(format: string, value: any) {
+    if (this.quillInstance) {
+      this.quillInstance.format(format, value);
+      this.syncState();
+    }
   }
 
   private getCharacterCount(): number {
