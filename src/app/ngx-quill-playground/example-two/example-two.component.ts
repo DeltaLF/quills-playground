@@ -5,6 +5,7 @@ import {
   SelectionChange,
 } from 'ngx-quill';
 import { CommonModule } from '@angular/common';
+import Quill from 'quill';
 
 @Component({
   selector: 'app-example-two',
@@ -14,62 +15,59 @@ import { CommonModule } from '@angular/common';
   styleUrl: './example-two.component.scss',
 })
 export class ExampleTwoComponent {
-  // 1. We need a reference to our custom toolbar in the template
   @ViewChild('toolbar') toolbar!: ElementRef;
 
-  // 2. State for our custom buttons (Signals are perfect here)
   isBold = signal(false);
   isItalic = signal(false);
 
-  // 3. Store the Quill instance so we can call .format() manually
-  private quillInstance: any;
+  private quillInstance: Quill | null = null;
 
-  // 4. Configuration: We will bind the toolbar container in ngAfterViewInit or let ngx-quill handle it
-  // But wait! ngx-quill supports passing the ElementRef directly if we set it up right.
-  // For this exercise, we will use the "Selectors" approach or pass the element.
   modules = {
     toolbar: {
-      // We will update this in onEditorCreated or bind it if possible.
-      // Challenge: How to bind a ViewChild that doesn't exist yet?
-      // Hint: Use a simple container ID or let ngx-quill's customToolbarPosition handle it?
-      // Better: We will let Quill control the editor, and we MANUALLY control the toolbar.
       container: '#custom-toolbar-2', // We will give our div this ID
     },
   };
 
   onEditorCreated(quill: any) {
     this.quillInstance = quill;
-    console.log('Quill instance ready', quill);
   }
 
   onSelectionChanged(event: SelectionChange) {
-    console.log('### OnSelectionChanged Event:', event);
     if (!this.quillInstance) return;
-
-    if (event.range) {
-      // PRACTICE: Get the formats at the current cursor
-      const formats = this.quillInstance.getFormat(event.range);
-
-      // PRACTICE: Update your signals
-      this.isBold.set(!!formats['bold']);
-      this.isItalic.set(!!formats['italic']);
-    }
+  }
+  onEditorChanged(event: ContentChange | SelectionChange) {
+    // Either ContentChange or SelectionChange triggered
+    if (!this.quillInstance) return;
+    this.syncState();
   }
 
-  // PRACTICE: Implement these methods
+  onContentChanged(event: ContentChange) {
+    // You can handle content changes here if needed
+  }
+
+  /**
+   * Helper to sync our Signals with Quill's internal Truth.
+   */
+  private syncState() {
+    if (!this.quillInstance) return;
+    const formats = this.quillInstance.getFormat();
+    this.isBold.set(!!formats['bold']);
+    this.isItalic.set(!!formats['italic']);
+  }
+
   toggleBold() {
     if (this.quillInstance) {
-      // Toggle logic...
       const current = this.isBold();
       this.quillInstance.format('bold', !current);
+      this.syncState();
     }
   }
 
   toggleItalic() {
-    // Your turn...
     if (this.quillInstance) {
-      const isItalic = this.isItalic();
-      this.quillInstance.format('italic', !isItalic);
+      const current = this.isItalic();
+      this.quillInstance.format('italic', !current);
+      this.syncState();
     }
   }
 }

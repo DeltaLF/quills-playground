@@ -21,7 +21,7 @@
 
       <!-- Bold (Manual) -->
       <button type="button" (click)="toggleBold()" [class.active]="isBold()">
-        <b>B</b> (State: {{ isBold() }})
+        <b>B</b>
       </button>
 
       <!-- Italic (Manual) -->
@@ -30,14 +30,17 @@
         (click)="toggleItalic()"
         [class.active]="isItalic()"
       >
-        <i>I</i> (State: {{ isItalic() }})
+        <i>I</i>
       </button>
     </span>
   </div>
 
   <!--  The Editor -->
   <quill-editor
+    id="customized-quill"
     [modules]="modules"
+    (onEditorChanged)="onEditorChanged($event)"
+    (onContentChanged)="onContentChanged($event)"
     (onEditorCreated)="onEditorCreated($event)"
     (onSelectionChanged)="onSelectionChanged($event)"
     placeholder="Select text to see the state update..."
