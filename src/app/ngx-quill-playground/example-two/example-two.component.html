@@ -70,6 +70,10 @@
   >
   </quill-editor>
 
+  <div class="group">
+    <button (click)="onSave()">Save</button>
+    <button (click)="onLoad()">Load</button>
+  </div>
   <pre>Editor content: {{ editorContent | json }}</pre>
   <p>Character count: {{ characterCount() }}</p>
 </div>

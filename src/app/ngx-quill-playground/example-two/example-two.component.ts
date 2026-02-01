@@ -18,6 +18,8 @@ import Quill from 'quill';
 export class ExampleTwoComponent {
   @ViewChild('toolbar') toolbar!: ElementRef;
 
+  protected savedData = signal<string>('');
+
   protected isFocus = signal(false);
   protected isBold = signal(false);
   protected isItalic = signal(false);
@@ -98,6 +100,24 @@ export class ExampleTwoComponent {
 
   toggleReadOnly() {
     this.isReadonly.set(!this.isReadonly());
+  }
+
+  onSave() {
+    if (this.quillInstance) {
+      const delta = this.quillInstance.getContents();
+      this.savedData.set(JSON.stringify(delta));
+      localStorage.setItem('quill-data', this.savedData());
+    }
+  }
+
+  onLoad() {
+    if (this.quillInstance) {
+      this.savedData.set(localStorage.getItem('quill-data') || '');
+      if (!this.savedData()) return;
+      const delta = JSON.parse(this.savedData());
+      this.quillInstance.setContents(delta);
+      this.syncState();
+    }
   }
 
   private setFormat(format: string, value: any) {
