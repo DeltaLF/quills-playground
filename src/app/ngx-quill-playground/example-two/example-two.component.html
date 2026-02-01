@@ -48,6 +48,7 @@
   <quill-editor
     id="customized-quill"
     [(ngModel)]="editorContent"
+    [theme]="'snow'"
     [modules]="modules"
     (onEditorChanged)="onEditorChanged($event)"
     (onContentChanged)="onContentChanged($event)"
@@ -58,5 +59,6 @@
   >
   </quill-editor>
 
-  <pre>{{ editorContent | json }}</pre>
+  <pre>Editor content: {{ editorContent | json }}</pre>
+  <p>Character count: {{ characterCount() }}</p>
 </div>

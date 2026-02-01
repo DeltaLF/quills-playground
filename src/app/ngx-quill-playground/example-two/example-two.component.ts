@@ -21,6 +21,7 @@ export class ExampleTwoComponent {
   protected isBold = signal(false);
   protected isItalic = signal(false);
   protected isReadonly = signal(false);
+  protected characterCount = signal<number>(0);
   protected editorContent: string = '';
 
   private quillInstance: Quill | null = null;
@@ -46,6 +47,7 @@ export class ExampleTwoComponent {
 
   onContentChanged(event: ContentChange) {
     // You can handle content changes here if needed
+    this.characterCount.set(this.getCharacterCount());
   }
 
   /**
@@ -76,5 +78,11 @@ export class ExampleTwoComponent {
 
   toggleReadOnly() {
     this.isReadonly.set(!this.isReadonly());
+  }
+
+  private getCharacterCount(): number {
+    if (!this.quillInstance) return 0;
+    const text = this.quillInstance.getText();
+    return text.trim().length;
   }
 }
