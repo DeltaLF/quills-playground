@@ -38,6 +38,7 @@
   <!--  The Editor -->
   <quill-editor
     id="customized-quill"
+    [(ngModel)]="editorContent"
     [modules]="modules"
     (onEditorChanged)="onEditorChanged($event)"
     (onContentChanged)="onContentChanged($event)"
@@ -46,4 +47,6 @@
     placeholder="Select text to see the state update..."
   >
   </quill-editor>
+
+  <pre>{{ editorContent | json }}</pre>
 </div>

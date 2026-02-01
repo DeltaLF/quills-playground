@@ -1,4 +1,5 @@
 import { Component, signal, ViewChild, ElementRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
   QuillEditorComponent,
   ContentChange,
@@ -10,7 +11,7 @@ import Quill from 'quill';
 @Component({
   selector: 'app-example-two',
   standalone: true,
-  imports: [QuillEditorComponent, CommonModule],
+  imports: [QuillEditorComponent, CommonModule, FormsModule],
   templateUrl: './example-two.component.html',
   styleUrl: './example-two.component.scss',
 })
@@ -21,6 +22,8 @@ export class ExampleTwoComponent {
   isItalic = signal(false);
 
   private quillInstance: Quill | null = null;
+
+  protected editorContent: string = '';
 
   modules = {
     toolbar: {
