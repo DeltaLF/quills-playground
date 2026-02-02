@@ -41,6 +41,20 @@
         <option value="5">Header 5</option>
       </select>
 
+      <select
+        id="mentionedUserSelect"
+        [value]="selectedUser()"
+        (change)="onMentionedUserSelectChange($event)"
+      >
+        <option *ngFor="let user of mockedUsers" [value]="user.id">
+          {{ user.value }}
+        </option>
+      </select>
+
+      <button type="button" (click)="insertMention()">
+        Insert &#64;{{ getUserById(selectedUser()) }}
+      </button>
+
       <button
         type="button"
         class="icon-button"

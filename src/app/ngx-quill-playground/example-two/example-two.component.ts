@@ -7,6 +7,20 @@ import {
 } from 'ngx-quill';
 import { CommonModule } from '@angular/common';
 import Quill from 'quill';
+import { MentionBlot } from 'src/app/services/quills/mention.blot';
+
+const MOCKED_USERS: { [key: string]: string } = {
+  'user-001': 'Alice',
+  'user-002': 'Bob',
+  'user-003': 'Charlie',
+  'user-004': 'Diana',
+  'user-005': 'Eve',
+  'user-006': 'Frank',
+  'user-007': 'Grace',
+  'user-008': 'Heidi',
+  'user-009': 'Ivan',
+  'user-010': 'Judy',
+};
 
 @Component({
   selector: 'app-example-two',
@@ -18,6 +32,10 @@ import Quill from 'quill';
 export class ExampleTwoComponent {
   @ViewChild('toolbar') toolbar!: ElementRef;
 
+  protected mockedUsers = Object.entries(MOCKED_USERS).map(([id, value]) => ({
+    id,
+    value,
+  }));
   protected savedData = signal<string>('');
 
   protected isFocus = signal(false);
@@ -29,6 +47,8 @@ export class ExampleTwoComponent {
   protected editorContent: string = '';
   protected selectedHeader = signal<number | null>(null);
 
+  protected selectedUser = signal<string>(this.mockedUsers[0].id);
+
   private quillInstance: Quill | null = null;
 
   modules = {
@@ -37,6 +57,7 @@ export class ExampleTwoComponent {
 
   onEditorCreated(quill: any) {
     this.quillInstance = quill;
+    Quill.register(MentionBlot as any, true);
   }
 
   onSelectionChanged(event: SelectionChange) {
@@ -118,6 +139,32 @@ export class ExampleTwoComponent {
       this.quillInstance.setContents(delta);
       this.syncState();
     }
+  }
+
+  onMentionedUserSelectChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    const value = selectElement.value;
+    this.selectedUser.set(value);
+  }
+
+  insertMention() {
+    if (!this.quillInstance) return;
+    const userId = this.selectedUser();
+    const userName = this.getUserById(userId);
+    const range = this.quillInstance.getSelection(true);
+    // Get current selection/cursor
+    if (range) {
+      this.quillInstance.insertEmbed(range.index, 'mention', {
+        id: userId,
+        value: userName,
+      });
+      this.quillInstance.setSelection(range.index + 1);
+      // Move cursor past the mention
+    }
+  }
+
+  getUserById(id: string): string {
+    return MOCKED_USERS[id] || 'Unknown User';
   }
 
   private setFormat(format: string, value: any) {

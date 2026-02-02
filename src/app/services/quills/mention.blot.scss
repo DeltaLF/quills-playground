@@ -1,0 +1,9 @@
+.mention {
+  background-color: var(--sys-color-primary-container);
+  color: var(--sys-color-on-primary-container);
+  padding: 0.1rem 0.4rem;
+  border-radius: 9999px; /* Pill shape */
+  white-space: nowrap;
+  font-weight: bold;
+  cursor: default; /* Indicate it's not normal text */
+}
