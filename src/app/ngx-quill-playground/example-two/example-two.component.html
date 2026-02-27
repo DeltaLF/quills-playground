@@ -4,7 +4,7 @@
 
   <!--  The Custom Toolbar -->
   <!-- We give it an ID so Quill can find it easily via the modules config -->
-  <div id="custom-toolbar-2" class="custom-toolbar">
+  <div class="custom-toolbar">
     <span class="group">
       <!-- Bold (Manual) -->
       <button type="button" (click)="toggleBold()" [class.active]="isBold()">
@@ -68,8 +68,6 @@
 
   <!--  The Editor -->
   <quill-editor
-    id="customized-quill"
-    [(ngModel)]="editorContent"
     [theme]="'snow'"
     [modules]="modules"
     (onEditorChanged)="onEditorChanged($event)"

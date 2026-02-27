@@ -1,4 +1,12 @@
-import { Component, signal, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  signal,
+  ViewChild,
+  ElementRef,
+  Input,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   QuillEditorComponent,
@@ -6,7 +14,7 @@ import {
   SelectionChange,
 } from 'ngx-quill';
 import { CommonModule } from '@angular/common';
-import Quill from 'quill';
+import Quill, { Delta } from 'quill';
 import { MentionBlot } from 'src/app/services/quills/mention.blot';
 
 const MOCKED_USERS: { [key: string]: string } = {
@@ -32,6 +40,9 @@ const MOCKED_USERS: { [key: string]: string } = {
 export class ExampleTwoComponent {
   @ViewChild('toolbar') toolbar!: ElementRef;
 
+  @Input() editorContent: Delta = new Delta();
+  @Output() editorContentChange = new EventEmitter<Delta>();
+
   protected mockedUsers = Object.entries(MOCKED_USERS).map(([id, value]) => ({
     id,
     value,
@@ -44,7 +55,7 @@ export class ExampleTwoComponent {
   protected isUnderline = signal(false);
   protected isReadonly = signal(false);
   protected characterCount = signal<number>(0);
-  protected editorContent: string = '';
+  // protected editorContent: string = '';
   protected selectedHeader = signal<number | null>(null);
 
   protected selectedUser = signal<string>(this.mockedUsers[0].id);
@@ -57,6 +68,7 @@ export class ExampleTwoComponent {
 
   onEditorCreated(quill: any) {
     this.quillInstance = quill;
+    this.quillInstance?.setContents(this.editorContent);
     Quill.register(MentionBlot as any, true);
   }
 
@@ -75,6 +87,9 @@ export class ExampleTwoComponent {
   onEditorChanged(event: ContentChange | SelectionChange) {}
 
   onContentChanged(event: ContentChange) {
+    this.editorContent = event.content;
+    this.editorContentChange.emit(this.editorContent);
+
     this.characterCount.set(this.getCharacterCount());
   }
 

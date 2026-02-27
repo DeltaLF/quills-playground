@@ -3,9 +3,10 @@
     <app-example-one></app-example-one>
   </section>
 
-  <hr class="divider">
+  <hr class="divider" />
 
   <section class="example-section">
-    <app-example-two></app-example-two>
+    <h3>{{ quillContent | json }}</h3>
+    <app-example-two [(editorContent)]="quillContent"></app-example-two>
   </section>
 </div>
