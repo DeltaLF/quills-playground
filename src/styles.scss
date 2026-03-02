@@ -1,8 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'quill/dist/quill.snow.css';
-@import 'quill/dist/quill.bubble.css';
-@import 'assets/styles/_variables.css';
-@import 'assets/styles/_variables-dark.css';
+@import "quill/dist/quill.snow.css";
+@import "quill/dist/quill.bubble.css";
+@import "assets/styles/_variables.css";
+@import "assets/styles/_variables-dark.css";
+
+@import "app/services/quills/mention.blot.scss";
 
 :root {
   background-color: var(--sys-color-surface);
@@ -10,4 +12,4 @@
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-@import 'assets/styles/quill-theme-overrides.scss';
+@import "assets/styles/quill-theme-overrides.scss";

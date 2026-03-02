@@ -1,25 +1,21 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<header class="navbar">
+  <div class="brand">Pkcg Playground</div>
+  <nav>
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Home</a
+    >
+    <a routerLink="/native-quill" routerLinkActive="active">Native Quill</a>
+    <a routerLink="/ngx-quill" routerLinkActive="active">Ngx Quill</a>
+    <a routerLink="/design-tokens" routerLinkActive="active">Tokens</a>
+  </nav>
+  <button (click)="toggleTheme()" class="theme-toggle">
+    {{ isDark ? "Light" : "Dark" }} Mode
+  </button>
+</header>
 
-<style></style>
-
-<main class="main">
-  <app-token-playground></app-token-playground>
-  <app-quills-playground></app-quills-playground>
+<main class="content">
+  <router-outlet></router-outlet>
 </main>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<router-outlet />

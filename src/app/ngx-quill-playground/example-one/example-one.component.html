@@ -1,0 +1,16 @@
+<div class="ngx-playground">
+  <h1>Example 1: Reactive Forms + Tokens</h1>
+  <p class="subtitle">Standard usage with custom config.</p>
+
+  <quill-editor 
+    [formControl]="editorControl"
+    [modules]="quillConfig"
+    theme="snow"
+    placeholder="Start typing with design tokens...">
+  </quill-editor>
+
+  <div class="output-preview">
+    <h3>Live HTML Output</h3>
+    <pre>{{ editorControl.value }}</pre>
+  </div>
+</div>

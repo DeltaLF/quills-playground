@@ -1,0 +1,12 @@
+<div class="playground-wrapper">
+  <section class="example-section">
+    <app-example-one></app-example-one>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="example-section">
+    <h3>{{ quillContent | json }}</h3>
+    <app-example-two [(editorContent)]="quillContent"></app-example-two>
+  </section>
+</div>

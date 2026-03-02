@@ -1,0 +1,91 @@
+<div class="ngx-playground">
+  <h1>Example 2: Custom Toolbar & State</h1>
+  <p class="subtitle">Practice: Manually wire up buttons and sync state.</p>
+
+  <!--  The Custom Toolbar -->
+  <!-- We give it an ID so Quill can find it easily via the modules config -->
+  <div class="custom-toolbar">
+    <span class="group">
+      <!-- Bold (Manual) -->
+      <button type="button" (click)="toggleBold()" [class.active]="isBold()">
+        <b>B</b>
+      </button>
+
+      <!-- Italic (Manual) -->
+      <button
+        type="button"
+        (click)="toggleItalic()"
+        [class.active]="isItalic()"
+      >
+        <i>I</i>
+      </button>
+
+      <button
+        type="button"
+        (click)="toggleUnderline()"
+        [class.active]="isUnderline()"
+      >
+        <u>U</u>
+      </button>
+
+      <select
+        id="headerSelect"
+        [value]="selectedHeader()"
+        (change)="onHeaderSelectChange($event)"
+      >
+        <option value="null">Normal</option>
+        <option value="1">Header 1</option>
+        <option value="2">Header 2</option>
+        <option value="3">Header 3</option>
+        <option value="4">Header 4</option>
+        <option value="5">Header 5</option>
+      </select>
+
+      <select
+        id="mentionedUserSelect"
+        [value]="selectedUser()"
+        (change)="onMentionedUserSelectChange($event)"
+      >
+        <option *ngFor="let user of mockedUsers" [value]="user.id">
+          {{ user.value }}
+        </option>
+      </select>
+
+      <button type="button" (click)="insertMention()">
+        Insert &#64;{{ getUserById(selectedUser()) }}
+      </button>
+
+      <button
+        type="button"
+        class="icon-button"
+        (click)="toggleReadOnly()"
+        [class.active]="isReadonly()"
+      >
+        <i class="material-icons">lock</i>
+      </button>
+    </span>
+  </div>
+
+  <!--  The Editor -->
+  <quill-editor
+    [theme]="'snow'"
+    [modules]="modules"
+    (onEditorChanged)="onEditorChanged($event)"
+    (onContentChanged)="onContentChanged($event)"
+    (onEditorCreated)="onEditorCreated($event)"
+    (onSelectionChanged)="onSelectionChanged($event)"
+    (onFocus)="onFocus($event)"
+    (onBlur)="onBlur($event)"
+    [readOnly]="isReadonly()"
+    placeholder="Select text to see the state update..."
+    [class.focused]="isFocus()"
+  >
+  </quill-editor>
+
+  <div class="group">
+    <button (click)="onSave()">Save</button>
+    <button (click)="onLoad()">Load</button>
+  </div>
+  <pre>Editor content: {{ editorContent | json }}</pre>
+  <p>Character count: {{ characterCount() }}</p>
+</div>

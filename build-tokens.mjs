@@ -10,6 +10,14 @@ StyleDictionary.registerFormat({
   }
 });
 
+// Register a format for JS Object output
+StyleDictionary.registerFormat({
+  name: 'javascript/esm',
+  format: function({ dictionary }) {
+    return `export default ${JSON.stringify(dictionary.tokens, null, 2)} as const;`;
+  }
+});
+
 // LIGHT THEME CONFIG
 const lightConfig = {
   source: ["tokens/core/**/*.json", "tokens/semantic/theme.json", "tokens/component/**/*.json"],
@@ -23,6 +31,14 @@ const lightConfig = {
         options: {
           outputReferences: true
         }
+      }]
+    },
+    js: {
+      transformGroup: "js",
+      buildPath: "src/assets/",
+      files: [{
+        destination: "tokens.ts",
+        format: "javascript/esm"
       }]
     }
   }

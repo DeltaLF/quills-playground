@@ -1,0 +1,12 @@
+.playground-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.divider {
+  border: 0;
+  height: 1px;
+  background-color: var(--sys-color-outline);
+  margin: 0;
+}
